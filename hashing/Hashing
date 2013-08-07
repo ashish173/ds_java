@@ -1,4 +1,8 @@
-// Hashing is a very efficient data structure. Lookup in a Hash is O(1) most of the time.
-
-
+1) Hashing is a very efficient data structure. Lookup in a Hash is O(1) most of the time.
+2) Collision is two elements fit in one index.
+3) Collision can't be avoided but it can be minimized.
+4) TWO METHODS :- Open addressing, Separate Chaining (avoid collision)
+5) Open Addressing:- 
+6) Separate Chaining:-
+7) Hash Functions:-
 
