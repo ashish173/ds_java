@@ -1,13 +1,7 @@
-// Hashing in java
-// In this programe we use hashing with open addressing approach
-//
+// Hashing in java(linear probing)
 import java.io.*; 
-import java.util.*;
+
 // DataItem class
-// insert method
-// find method
-
-
 class DataItem {
     private int iData;
     // constructor
@@ -43,16 +37,12 @@ class HashTable {
     public int hashFunc(int key) {
         return key % arraySize;
     }
-
     // insert method
     public void insert(DataItem aDataItem) {
         int key = aDataItem.getKey();  // extract key
-        int hashVal = hashFunc(key);   // calc index 
-        // System.out.print("key is: " + key);
-        // System.out.println(" hash calculated is: " + hashVal);
-        while(hashArray[hashVal] != null)// && hashArray[hashVal].getKey() != -1) 
+        int hashVal = hashFunc(key);   // calculate index 
+        while(hashArray[hashVal] != null)
         {
-            // calculate a new hash 
             ++hashVal;              // go to next cell
             hashVal %= arraySize;   // wraparound if neccessary in case of hasVal exceeding arraySize
         }
@@ -71,21 +61,15 @@ class HashTable {
     }
 }
 
-class hash{
-    public static void main(String args[]){
+class hash {
+    public static void main(String args[]) {
         DataItem aDataItem;   // a new dataitem reference 
         int size=0, aKey, keysPerCell=10, n=0;
-        // take input   for size 
         System.out.print("Enter size of hash table");
-        //try {
-            size = getInt();
-            System.out.print("How many values you want to enter: ");
-            n = getInt();
-        //}
-        //catch(IOException ex) {System.out.println("IOException caught");}
-        // create HashArray 
+        size = getInt();
+        System.out.print("How many values you want to enter: ");
+        n = getInt();
         HashTable theHashTable = new HashTable(size);
- 
         // enter random values 
         for(int i=0; i<n; i++) {
             aKey = (int)(java.lang.Math.random() * keysPerCell * size);
@@ -124,9 +108,7 @@ class hash{
             }
         }
     }
-    
-    public static String getString() //throws IOException 
-    {
+    public static String getString() {
         InputStreamReader isr = new InputStreamReader(System.in);  // InputStreamReader Object
         BufferedReader br = new BufferedReader(isr);               // BufferedReader Object
         try {
@@ -135,17 +117,12 @@ class hash{
         } catch(IOException ex) {}
         return null;
     }
-    
-    public static char getChar() //throws IOException 
-    {
+    public static char getChar() {
         String s = getString();
         return s.charAt(0);  // returns the first char of string
     }
-    
-    public static int getInt() //throws IOException 
-    {
+    public static int getInt() {
         String s = getString();
         return Integer.parseInt(s);
     }
-
 }
