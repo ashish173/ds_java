@@ -21,9 +21,11 @@
 import java.io.*;
 
 class anagrams {
+    // data members
     static int size, ch;
     static String str=null; 
     static char[] arrChar = new char[100];
+    // member functions
     public static void main(String[] args) throws IOException {
         // str = "CAT";
         System.out.println("\n\t\t Anagrams (String permutations)\n\t\t\t\t\t\tauthor -> ashish singh\n"); 
@@ -32,19 +34,21 @@ class anagrams {
             System.out.print("\t\tEnter string: ");
             str = getString();
             size = str.length();
-            if (size==0)
+            if (size==0)   // if string entered empty skip the loop
                 continue;
         // put string in an array
             arrChar = new char[100];
             for(int i=0; i<size; i++)
                 arrChar[i] = str.charAt(i);
-
+            
             System.out.println("\n\t1. Simple recursion");
             System.out.println("\n\t2. Detailed recusion with stack calls");
+            System.out.println("\n\t3. Exit");
+            
             System.out.print("\n\n\tEnter your choice: ");
             try {
-             ch = getInt();
-            }catch(NumberFormatException ex) { System.exit(1); }
+             ch = getInt();   
+            }catch(NumberFormatException ex) { System.exit(1); } //for no input 
 
             switch(ch) {
                 case 1: 
@@ -54,8 +58,11 @@ class anagrams {
                 case 2:
                     anagram_simul(size);  // stack calls 
                     break;
+                case 3:
+                    System.exit(1);
+                    break;    
                 default:
-                    System.out.println("Enter valid values");
+                    break;
             }
         }
     }
@@ -118,7 +125,7 @@ class anagrams {
     }
 
     public static void showString() {
-       System.out.print("Showing string: "); 
+       // System.out.print("Showing string: "); 
        for(int i=0; i<size; i++)
            System.out.print(arrChar[i]);
        System.out.print(" ");
@@ -129,9 +136,9 @@ class anagrams {
         // save first character
         int position = size - newSize;
         char temp = arrChar[position];  
-        // now swap array
+        // now shift array to left
         for(int i=position+1; i<size; i++)
             arrChar[i-1] = arrChar[i];
-        arrChar[size-1] = temp;
+        arrChar[size-1] = temp;  // adding last position
     }
 }
