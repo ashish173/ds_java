@@ -1,7 +1,7 @@
 // anagrams.java
 // A simple programe to print all possible permutations
 // of a given string
-//        Fixed   excange
+//        Fixed   rotate
 // cat -->  c  ->  a  t
 //          c  ->  t  a
 //          c  ->  a  t  // but will not be printed this is original state
