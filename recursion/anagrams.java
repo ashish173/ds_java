@@ -25,9 +25,9 @@ class anagrams {
     static int size, ch;
     static String str=null; 
     static char[] arrChar = new char[100];
+
     // member functions
     public static void main(String[] args) throws IOException {
-        // str = "CAT";
         System.out.println("\n\t\t Anagrams (String permutations)\n\t\t\t\t\t\tauthor -> ashish singh\n"); 
         while(true) {
             System.out.println();
@@ -52,7 +52,6 @@ class anagrams {
 
             switch(ch) {
                 case 1: 
-                    System.out.println("case 1");
                     anagram(size);   // simple recursion
                     break;
                 case 2:
