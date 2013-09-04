@@ -1,6 +1,6 @@
 // Tower of hanoi 
 // Find the minimum number of moves required to
-// move all the disks to 3rd 
+// print all stack calls 
 
 
 public class tower_hanoi {
