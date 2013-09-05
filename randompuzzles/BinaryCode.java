@@ -14,7 +14,7 @@ String[] decode(String message)
 */
 
 
-class BinaryCode {
+public class BinaryCode {
 
     public static void main(String[] args) {
         String str = "123210122";
