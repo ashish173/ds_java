@@ -38,10 +38,9 @@ public class Lottery {
 
     public static String[] sortByOdds(String[] rules) {
         String[] sortedArray;   // stores the lotteries in sorted order
+        int numberOfLotteries = rules.length;
         int[] scores = new int[numberOfLotteries];
         
-        // find the number of lotteries
-        int numberOfLotteries = rules.length;
         System.out.println("Number of Lotteries " + numberOfLotteries);
         
         // for all lotteries calculate Probability
@@ -57,9 +56,10 @@ public class Lottery {
     // function to calculate the probability of winning of lottery ticket
     public static int calcProb(String rule) {
         System.out.println(rule);
+        return 0;
     }
 
-    public static int[] sort(int[] arr) {
-        
-    }
+    //public static int[] sort(int[] arr) {
+    //    return 0;
+    //}
 }
