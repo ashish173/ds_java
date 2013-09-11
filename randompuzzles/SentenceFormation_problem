@@ -1,0 +1,6 @@
+// You are given a sentence to transfer via a network but 
+// but due to network malfuctioning you loose all the space
+// in the sentence which makes the whole sentence a string
+// of characters. You have to remake the sentenc. you have // a dictionary at your disposal and assuming that all the // words are in the dictionary.
+
+// additional functionality is that the words that are not in the diciontary can be the nouns etc.
