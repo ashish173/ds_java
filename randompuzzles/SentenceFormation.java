@@ -8,7 +8,7 @@ public class SentenceFormation {
     static int messageLength = message.length();
     static boolean sentenceFormationFlag = false;   // checks for last word in the message is in dictionary
     static String[] decipheredMessage;
-    static int pointer = 0;
+    static int pointer = -1;
     
     // main driver function 
     public static void main(String[] args) {
@@ -30,36 +30,36 @@ public class SentenceFormation {
   			String word="";
   			for(int i=index; i<messageLength; i++) {
   				word = word + message.charAt(i);
-  				System.out.println("word is " + word);
+  				// System.out.println("word is " + word);
 
   				if(search(word) && i==messageLength-1) {
-  					 System.out.println("made the sentence " + word);
+  					// System.out.println("made the sentence " + word);
   					// makeSentence(i+1);
   					sentenceFormationFlag=true;
   					System.out.println(" " + word);	
   					return true;
   				}
 				else if(search(word)) {
-  					System.out.println("make sentence called for word " + word);
+  					// System.out.println("make sentence called for word " + word);
   					makeSentence(i+1);
   					if(sentenceFormationFlag==true) {
-  						System.out.println(" " + word);
+  						// System.out.println(" " + word);  // prints the words after sentence formation
   						// add the words to an array of strings
-  						// decipheredMessage[pointer] = new String();
-  						// decipheredMessage[pointer++] = word;
+  						decipheredMessage[++pointer] = new String();
+  						decipheredMessage[pointer] = word;
   						return true;
   					}
 				}
   			}
   		}
-  		// showMessage(decipheredMessage);
+  		showMessage(decipheredMessage);
   		return true;
   	}
 
   	public static boolean search(String key) {
   		for(int i=0; i<dict.length; i++) {
   			if(dict[i].equals(key)) {
-  				 System.out.println("got a word in dict");
+  				// System.out.println("got a word in dict");
   				return true;
   			}
   		}
@@ -68,7 +68,7 @@ public class SentenceFormation {
 
   	public static void showMessage(String[] decipheredMessage) {
   		if(decipheredMessage != null) {
-  			for(int i=decipheredMessage.length; i>=0; i++)
+  			for(int i=decipheredMessage.length; i>=0; i--)
   				System.out.println(" " + decipheredMessage[i]);
   		}
   	}
