@@ -1,7 +1,7 @@
 // SentenceFormation.java
 //
 public class SentenceFormation {
-    static String[] dict = {"swim","swimmed","swimming","edge","gem","met","etopia","opia","arms", "topi", "rms"};
+    static String[] dict = {"swim","swimmed","swimming","edge","gem","met","etopi","opia","arms", "topi", "rms"};
     // "rms", "arms" are present in our dictionary
     
     static String message = "swimmedgemetopiarms";
@@ -30,17 +30,17 @@ public class SentenceFormation {
   			String word="";
   			for(int i=index; i<messageLength; i++) {
   				word = word + message.charAt(i);
-  				// System.out.println("word is " + word);
+  				System.out.println("word is " + word);
 
   				if(search(word) && i==messageLength-1) {
-  					// System.out.println("made the sentence " + word);
+  					 System.out.println("made the sentence " + word);
   					// makeSentence(i+1);
   					sentenceFormationFlag=true;
   					System.out.println(" " + word);	
   					return true;
   				}
 				else if(search(word)) {
-  					// System.out.println("make sentence called for word " + word);
+  					System.out.println("make sentence called for word " + word);
   					makeSentence(i+1);
   					if(sentenceFormationFlag==true) {
   						System.out.println(" " + word);
@@ -59,7 +59,7 @@ public class SentenceFormation {
   	public static boolean search(String key) {
   		for(int i=0; i<dict.length; i++) {
   			if(dict[i].equals(key)) {
-  				// System.out.println("got a word in dict");
+  				 System.out.println("got a word in dict");
   				return true;
   			}
   		}
