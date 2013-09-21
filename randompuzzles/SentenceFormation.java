@@ -45,8 +45,8 @@ public class SentenceFormation {
   					if(sentenceFormationFlag==true) {
   						// System.out.println(" " + word);  // prints the words after sentence formation
   						// add the words to an array of strings
-  						decipheredMessage[++pointer] = new String();
-  						decipheredMessage[pointer] = word;
+  						decipheredMessage[pointer] = new String();
+  						decipheredMessage[pointer++] = word;
   						return true;
   					}
 				}
