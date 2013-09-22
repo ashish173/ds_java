@@ -25,8 +25,8 @@ class Tree {
 		}
 		else {  // if the tree is not empty
 			while(true) {
+				parent = current;
 				if(nodeValue < current.iData) {
-					parent = current;
 					current = current.leftChild;
 					if(current == null) {
 						parent.leftChild = newNode;
@@ -34,7 +34,7 @@ class Tree {
 					}
 				}
 				else {
-					parent = current;
+					//parent = current;
 					current = current.rightChild;
 					if(current == null) {
 						parent.rightChild = newNode;
@@ -99,7 +99,7 @@ class Tree {
 	}
 	
 	// iterative postorder traversal 
-	public void postorderTraversalIter(Node root) {
+	/*public void postorderTraversalIter(Node root) {
 		// using a flag to check if the right node is visited
 		Node current = root;
 		Node parent;
@@ -126,6 +126,39 @@ class Tree {
 				}
 			} 
 		}
+	}*/
+
+	public void postorderTraversalIter(Node root) {
+		Node current = root;
+		do {	
+			// check if the node has right child
+			// push rightchild and then root node
+			// now current should point to roots leftchild
+			// do it untill you get null in current
+			// pop from stack if it has right child and that right child is on the 
+			// top of stack, push the poped root and assing current to right child 
+			// of the root.
+			// else print the root(if it has no root or the right child is not on top of stack). 
+				while(current!=null) {
+					if(current.rightChild!=null)
+						st.push(current.rightChild);
+					st.push(current);
+					current = current.leftChild;
+				} 
+				//pop on current equals to null
+				current = st.pop();
+				if(current.rightChild!=null && current.rightChild == st.peek()) {
+					// push parent to stack 
+					st.push(current);
+					current = current.rightChild;
+					// set current to right chlid
+				}
+				// only case where you print
+				else {
+					System.out.print(" " + current.iData);
+					current = null;
+				}
+			}while(st.isEmpty()==false);//!isEmpty(st));
 	}
 
 	public void InOTIterative() {
