@@ -169,8 +169,8 @@ class Tree {
 			if(max < limit) { 
 				System.out.println("calling right tree of: " + root.iData);
 				removing(root.rightChild, max);
-			//} // this only deletes the nodes if the node is the leaf node
-				// and has no cotribution in sum of other nodes
+			    // this only deletes the nodes that are leaf node
+				// and has no cotribution in sum of other branches
 				if(max < limit && root.rightChild == null && root.leftChild == null) {
 					System.out.println("deleting for max: " + max);
 					delete(root.iData);
