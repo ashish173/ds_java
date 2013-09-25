@@ -102,7 +102,6 @@ class Tree {
 		Node current = root;
 		Node parent = root;
 		while(true) {
-
 			if(current.iData==key)
 				return parent;
 			if(key < current.iData) {  	// go to left subtree
