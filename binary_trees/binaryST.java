@@ -269,23 +269,17 @@ public class binaryST {
 		// bst.PostOrder();  // this also works
 		// bst.PreOrder();	 // this also works
 		
-		// finding Max/Min	
+		// >>>finding Max/Min	
 		// System.out.println("Minimum is " + bst.findMin());  
 		// System.out.println("Maximum is " + bst.findMax()); // ^both these work
+		
 		// >>>Deletion
 		// when node to be deleted has only one child
 		// bst.delete(35);  // works for every node except root node
         // bst.Inorder();  // this works()
+		
+		// >>>Height	
 		System.out.print("height of tree " + bst.height());
-		/*while(true) {
-			System.out.println("Binary search tree");
-			System.out.println("1. Insert");
-			//System.out.println("Binary search tree");
-			//System.out.println("Binary search tree");
-			System.out.println("4.Exit");
-			InputStreamReader ir = new InputStreamReader(System.in);
-			BufferedReader br = new BufferedReader(ir);
-			String str = br.readLine();
-		}*/
+		
 	}
 }
