@@ -35,12 +35,12 @@ public class WolfDelaymaster {
 		}
 		return "VALID";
 	}
-	public static boolean validate(String str, int from, int times) {
+	public static boolean validate(String str, int index, int times) {
 		// System.out.println("from " + from + " number of w's " + times);
 		for(int i=0; i<4; i++) { // 1 iteration for w,o,l,f each
 			// System.out.println("In for loop checking rules");
 			for(int j=0; j<times; j++) { // runs 
-				if(str.charAt(from + j + i*times)!=arr[i])
+				if(str.charAt(index + j + i*times)!=arr[i])
 					return false;
 			}
 		}	
