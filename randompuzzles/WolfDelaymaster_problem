@@ -1,4 +1,4 @@
-Problem Statement
+Problem Statement(SRM 593 500 point problem)
     
 Wolf Sothe is playing the game Delaymaster. In this game, he can create new words according to the following rules:
 For each positive integer n, the string which consists of n copies of 'w', then n copies of 'o', then n copies of 'l', and finally n copies of 'f' is a valid word.
