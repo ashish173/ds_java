@@ -17,12 +17,14 @@ typedef struct {
 } edgenode;
 
 typedef struct {
-    edgenode *edge[MAXV+1];   // adjacency info
+    edgenode *edge[MAXV+1];   // edge is an array of edgenode pointer
     int degree[MAXV+1];       // outdegree of each vertex
     int nvertices;            // number of vertices in graph
     int nedges;               // number of edges in graph
     bool directed;            // is the graph directed?
 } graph;
+
+void insert_edge(graph *, int , int, bool);
 
 /* intializes am empty graph */
 void initialize_graph(graph *g, bool directed) {
@@ -50,18 +52,21 @@ void read_graph(graph *g, bool directed) {
     for(i=1; i<=m; i++) {
         printf("Enter the edges between x then y: ");
         scanf("%d %d", &x, &y);
-        insert_edge(g, x, y, directed);
+        insert_edge(g, x, y, directed);  // insert the edge
     }
 }
 
 /* insert nodes in the graph */
 void insert_edge(graph *g, int x, int y, bool directed) {
+    int name;
     edgenode *p;                    // temporary edgenode pointer
     p = malloc(sizeof(edgenode));   // allocate edgenode storage
     
-    p->weight = NULL;
+    p->weight = (int)NULL;    // typecast from pointer to integer
     p->y = y;
-    p->next = g->edge[x];
+
+    p->next = (edgenode *)g->edge[x];  // this needs to be corrected produces exception
+    
     g->edge[x] = p;                // insert at the head of the list
     g->degree[x]++;
     if(directed == false)           // in case of undirected graph
@@ -80,7 +85,7 @@ void print_graph(graph *g) {
         p = g->edge[i];
         while(p != NULL) {
             printf(" %d", p->y);
-            p = p->next;
+            p = (edgenode *)p->next;
         }
         printf("\n");
     }
@@ -89,8 +94,8 @@ void print_graph(graph *g) {
 // driver function
 int main(void) {  // notice void
     graph *g = malloc(sizeof(graph));
-    read_graph(g, true);    // true is a directed graph
-    print_graph(g);
-    return 0;
+    read_graph(g, true);    // true ~> directed graph
+    print_graph(g);         // prints the graph 
+    return 0; 
 }
 
