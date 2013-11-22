@@ -4,18 +4,21 @@
  * directed edge(x, y) by an edgenode y in x's adjacency list
  *
  */
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>  // for bool type to work
 
 #define MAXV   10   // maximum number of vertices
 
+// node structure
 typedef struct {
     int y;                    // adjacency info
     int weight;               // edge weight
     struct edgenode *next;    // pointer to next edge in list
 } edgenode;
 
+// graph strucutre
 typedef struct {
     edgenode *edge[MAXV+1];   // edge is an array of edgenode pointer
     int degree[MAXV+1];       // outdegree of each vertex
