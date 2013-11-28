@@ -1,0 +1,174 @@
+Topcoder 11.11.2013 Championship round
+Problem Statement[http://community.topcoder.com/longcontest/?module=ViewProblemStatement&rd=15801&pm=12835]
+    
+Your task is to implement part of an AI (artificial intelligence) for a real-time strategy game. Your part is resource gathering.  The game is played on an NxN square board. The rows of the board are numbered 0 to N-1 from top to bottom, the columns are numbered 0 to N-1 from left to right. The initial state of the board is given by a int[] board. It contains N^2 elements. Element r*N+c (0-based) describes the cell at row r, column c:
+If it is a positive integer X, the cell contains X resource units.
+If it is 0, the cell is empty.
+If it is -1, the cell contains a base.
+If it is -2, the cell is empty and contains a worker.
+The overall mechanics of the game are as follows. Workers can move over the board, gather resources and carry them to bases for subsequent storage and use. Additionally, workers can build bases and bases can build workers. The game process is divided into turns. During a single turn, each worker and each base are allowed to make one move. Here are the possible moves for a worker:
+Move to an adjacent empty cell in one of 4 directions: up (1), right (2), down (3) or left (4). Numbers in brackets represent integers used to encode the move. A cell is considered to be empty if it does not contain resources or a base. In particular, cells with workers are always empty and it is possible to have more than one worker in the same cell at the same time.
+Gather resources from an adjacent cell with resources. This move is encoded in the same way as the previous one (i.e. 1 means gather resources from the cell up from you, etc.). The worker takes exactly one turn to acquire all the resources from the cell (it stays in the current cell during this process). The cell containing the resources becomes empty starting from the next turn. All gathered resources are temporarily held by the worker. When holding resources the worker still can move, but it can't gather resources until it delivers the resources it currently holds to some base. The resources from one cell can be gathered only once.
+Deliver the resources held by the worker to an adjacent cell containing a base. This move is encoded in the same way as the previous one (i.e. 1 means deliver resources to the base in the up direction from the worker, etc.). In one turn, the worker delivers all of the resources it is carrying to the base (it stays in the current cell during this process). Starting from the next turn, these resources become available in your resource pool and can be spent on building additional workers/bases. Your resource pool can store an infinite amount of resources.
+Build a base in an adjacent empty cell in one of 4 directions: up (-1), right (-2), down (-3) or left (-4). Again, the numbers in the brackets represent the integers used to encode each of move. It takes exactly one turn to build a base and it will be able to perform moves starting from the next turn. The worker who builds the base does not move in the process. Once built, a base can't be moved or destroyed and the cell containing the base is no longer considered to be empty. In order to build a base, you must have a sufficient amount of resources in the resource pool at the beginning of the current turn (note that resources delivered to bases in the current turn are not yet in your resource pool). The costs of bases are given by int[] baseCost. The first base you build costs baseCost[0] resource units, the second base costs baseCost[1] resource units and so on. You are not allowed to build more bases than the number of elements in baseCost. You are allowed to build more than one base during the same turn (by different workers in different cells) as long as you have the resources to pay for them. All the resources you spent on building are removed from the resource pool and are not available in the next turn.
+Do nothing. This move is encoded as 0. The worker just stays in the current cell.
+Bases are much less active than workers and only have two possible kinds of moves:
+Do nothing. This move is encoded as 0.
+Build a worker in an adjacent empty cell in one of 4 directions: up (1), right (2), down (3) or left (4). The numbers in the brackets represent the integers used to encode each move. The worker will appear in the designated cell and starting from the next turn it will be able to perform moves. The costs of workers are given by int[] workerCost. The first worker you build costs workerCost[0] resource units, the second worker costs workerCost[1] resource units and so on. You are not allowed to build more workers than the number of elements in workerCost.
+There are a number of additional restrictions imposed on the moves of workers and bases:
+A worker can't interact (move, gather, deliver or build) with a cell outside the board.
+A worker can't gather resources before delivering the previously gathered resources to a base.
+A worker can't deliver resources to a base if it isn't currently carrying any resources.
+A worker can't build a base if it is currently carrying resources.
+A worker can't build a base at a cell with resources or at a cell that already contains a base.
+A worker can't build a base at a cell if another worker enters, leaves or stays in the cell during the current turn.
+A base can't build a worker at a cell outside the board.
+A base can't build a worker at a cell with resources or at a cell that contains another base.
+If some worker builds a base at a certain cell, no other worker is allowed to move to this cell in the current turn.
+Multiple workers can't gather resources from the same cell.
+Multiple workers can't build a base at the same cell.
+A base can't build a worker at a cell where another worker builds a base during the same turn.
+You start with the game field described by board and 0 resources in the pool. You will have exactly 1 base and 1 worker at the beginning (the worker will be in a cell adjacent to the base). There is no cost for the initial worker and base. You will need to control your worker(s) and base(s) during exactly T turns. The goal is to have the maximum amount of resources in the pool at the beginning of turn T+1 (1-based).  Implementation  You will need to implement the method bestStrategy. Its input parameters are int N, int[] board, int[] baseCost, int[] workerCost and int T. The return value must be an int[] that encodes all of the moves of your workers and bases during T turns. Let W[1], W[2], ..., W[T] be the number of workers you have at the beginning of each turn and B[1], B[2], ..., B[T] be the number of bases. Then return value must be formatted as follows: W[1] values encoding the moves of your workers, B[1] values encoding the moves of your bases, W[2] values encoding the moves of workers, B[2] values encoding the moves of bases, ..., W[T] value encoding the moves of workers, B[T] values encoding the moves of bases. Each W[i]/B[i] moves of workers/bases must be specified in the increasing order of workers/bases. Your first worker/base has a number of 1. The first worker/base you build will have a number of 2, the second worker/base will have a number of 3, and so on. If more than one worker/base is built during the same turn, the worker/base built by a lower-numbered base/worker will get a lower number.  Scoring  For each test case we will calculate your raw and normalized scores. If you were not able to control your workers/bases successfully during all T turns (due to time limit, memory limit, crash, invalid return format, trying to make a move that is not allowed, etc.), then your raw score is -1 and the normalized score is 0. Otherwise, the raw score will be the amount of resources in your resource pool at the beginning of turn T+1 (1-based). The normalized score for each test is 1,000,000.0 * YOUR / BEST, where YOUR is your raw score and BEST is the highest score currently obtained on this test case (i.e., considering the last submission from each competitor). Finally, your total score is equal to the arithmetic average of your normalized scores on all test cases.  Test case generation  Each test case is generated using the same algorithm (but with a different seed for the random number generator). To shorten the explanation, unless otherwise specified, all random choices are independent and assume uniform distribution.
+The value of N is chosen randomly between 40 and 60, inclusive.
+Two auxiliary real-valued parameters are generated: rp is chosen randomly between 0.25 and 0.75 and pw is chosen randomly between 1.0 and 5.0. Each cell of the board contains resources with probability rp and is empty with probability 1-rp. For each cell with resources, the amount is generated by ceil(10,000.0 * x^pw), where x is a random real-valued number between 0.0 and 1.0.
+Once all cells of the board are generated as described above, two adjacent cells are chosen randomly. One of them is overwritten to contain a base and the other one to contain a worker.
+The number of elements NB in baseCost is chosen randomly between 10 and 20, inclusive. A real-valued parameter bmul is generated randomly between 0.25 and 0.5. One more real-valued parameter bpw is generated as 100^(y/(NB-1)), where y is a random real-valued number between 0.0 and 1.0. Let Tot be the total amount of resources on the board and BS be the sum 1 + bpw + bpw^2 + ... + bpw^(NB-1). The value of baseCost[i] (0-based) is set to ceil(bpw^i / BS * Tot * bmul). In other words, the base costs approximately form a geometric progression with a multiple of bpw and the sum of this progression constitutes approximately the bmul-th part of all available resources.
+workerCost is generated using exactly the same algorithm as baseCost. The generation process is completely independent from the generation of baseCost (i.e., all parameters are generated from scratch).
+T is chosen as ceil(N*N*N/100*TMul) where TMul is a random real-valued number between 0.5 and 1.0.
+Tools  An offline tester/visualizer is available. You can use it to test/debug your solution locally. You can also check its source code to see the exact implementation of test case generation and score calculation.
+Definition
+    
+Class:
+GatheringResources
+Method:
+bestStrategy
+Parameters:
+int, int[], int[], int[], int
+Returns:
+int[]
+Method signature:
+int[] bestStrategy(int N, int[] board, int[] baseCost, int[] workerCost, int T)
+(be sure your methods are public)
+    
+
+Notes
+-
+The time limit is 10 seconds and the memory limit is 1024 MB.
+-
+There is no explicit code size limit. The implicit source code size limit is around 1 MB (it is not advisable to submit codes of size close to that or larger). Once your code is compiled, the binary size should not exceed 1 MB.
+-
+The compilation time limit is 30 seconds.
+-
+The processing server specifications can be found here.
+Examples
+0)
+
+    
+seed = 1
+N = 56
+rp = 0.6383631929699162
+pw = 4.454896589130927
+workerCost = {33168, 39313, 46596, 55229, 65461, 77589, 91964, 109001, 129196, 153132, 181502, 215128, 254984, 302224}
+baseCost = {17852, 20398, 23307, 26631, 30429, 34769, 39727, 45392, 51866, 59262, 67714, 77371, 88405, 101012, 115417, 131877, 150684, 172174, 196728}
+T = 1183
+ 
+1)
+
+    
+seed = 2
+N = 46
+rp = 0.5778196753979739
+pw = 1.16248414236534
+workerCost = {18823, 22225, 26242, 30984, 36584, 43196, 51002, 60220, 71103, 83954, 99127, 117042, 138195, 163170, 192660, 227479, 268592, 317134, 374450, 442124}
+baseCost = {72769, 83164, 95043, 108619, 124135, 141867, 162132, 185291, 211759, 242008, 276577, 316084}
+T = 924
+ 
+2)
+
+    
+seed = 3
+N = 59
+rp = 0.39490439831974483
+pw = 4.2601570814050405
+workerCost = {11099, 12519, 14121, 15928, 17966, 20265, 22859, 25784, 29083, 32805, 37003, 41738, 47079, 53104, 59900, 67565, 76211, 85964, 96965}
+baseCost = {5126, 6243, 7603, 9260, 11277, 13734, 16726, 20370, 24808, 30213, 36796, 44812, 54576, 66466, 80947, 98583, 120062, 146220, 178078}
+T = 1239
+ 
+3)
+
+    
+seed = 4
+N = 40
+rp = 0.4687080321748261
+pw = 4.003147756197552
+workerCost = {14022, 16803, 20136, 24131, 28918, 34655, 41530, 49768, 59642, 71473, 85652, 102644, 123007}
+baseCost = {1884, 2367, 2972, 3733, 4689, 5889, 7397, 9291, 11669, 14657, 18409, 23122, 29042, 36477, 45816, 57546, 72279, 90784, 114027, 143221}
+T = 541
+ 
+4)
+
+    
+seed = 5
+N = 57
+rp = 0.2590101960942046
+pw = 4.888170230214912
+workerCost = {8085, 9527, 11225, 13226, 15584, 18362, 21635, 25492, 30036, 35391, 41700, 49134, 57894, 68215}
+baseCost = {18411, 18632, 18856, 19083, 19312, 19545, 19780, 20017, 20258, 20502, 20748, 20998, 21250, 21506, 21764, 22026, 22291, 22559, 22830}
+T = 1791
+ 
+5)
+
+    
+seed = 6
+N = 43
+rp = 0.3474282742975782
+pw = 1.239875217300101
+workerCost = {33264, 41656, 52166, 65327, 81809, 102449, 128297, 160666, 201202, 251965, 315536}
+baseCost = {34990, 37940, 41139, 44608, 48369, 52448, 56870, 61665, 66864, 72502, 78615, 85244, 92432, 100225, 108676}
+T = 508
+ 
+6)
+
+    
+seed = 7
+N = 58
+rp = 0.685370373024301
+pw = 2.91727254124499
+workerCost = {72827, 77072, 81564, 86319, 91350, 96674, 102309, 108273, 114584, 121262, 128330, 135810, 143727, 152104, 160970}
+baseCost = {52044, 59135, 67193, 76348, 86751, 98572, 112003, 127264, 144605, 164308, 186696, 212135, 241040}
+T = 1334
+ 
+7)
+
+    
+seed = 8
+N = 44
+rp = 0.5525900014192894
+pw = 4.134677422550846
+workerCost = {8275, 11206, 15175, 20550, 27830, 37688, 51037, 69116, 93599, 126754, 171653, 232457}
+baseCost = {17651, 20796, 24503, 28869, 34014, 40075, 47217, 55632, 65546, 77227, 90990, 107206, 126311, 148821}
+T = 611
+ 
+8)
+
+    
+seed = 9
+N = 50
+rp = 0.32114478075503433
+pw = 4.0303472214276646
+workerCost = {4362, 5323, 6496, 7927, 9673, 11804, 14405, 17579, 21452, 26178, 31946, 38985, 47574, 58056, 70847, 86457, 105506}
+baseCost = {5187, 7036, 9545, 12947, 17564, 23826, 32321, 43845, 59478, 80685, 109453, 148479, 201420}
+T = 1138
+ 
+9)
+
+    
+seed = 10
+N = 44
+rp = 0.2767842711612942
+pw = 4.299079707434819
+workerCost = {2974, 3466, 4040, 4709, 5489, 6398, 7458, 8694, 10134, 11812, 13769, 16050, 18708, 21807, 25420, 29630, 34539, 40260, 46929, 54703}
+baseCost = {3847, 4463, 5176, 6004, 6965, 8079, 9371, 10870, 12609, 14626, 16965, 19679, 22827, 26479, 30714, 35628, 41327}
+T = 747
+ 
+This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.

@@ -44,9 +44,9 @@ void initialize_graph(graph *g, bool directed) {
 
 /* reads all the edges and prints on the screen */
 void read_graph(graph *g, bool directed) {
-    int i;  // counter
-    int m;  // number of edges
-    int x, y;
+    int i;      // counter
+    int m;      // number of edges
+    int x, y;   // vertices in edge(x, y)
 
     initialize_graph(g, directed);
     printf("Enter vertices and edges: ");
