@@ -4,12 +4,14 @@
 
 #define MAXV 20
 
+/* edgenode structure */
 typedef struct edgenode {
     int info;        // adjacency info
     int weight;   // weight
     struct edgenode *next;  // stores the link to next edgenode
 } edgenode;
 
+/* graph structure */
 typedef struct graph {
     edgenode *edge[MAXV];   // array for storing 
     int degree[MAXV];
@@ -17,11 +19,12 @@ typedef struct graph {
     int nedges;
     bool directed;
 } graph;
+
 // function declarations
 
 void insert_edge(graph *, int , int , bool);
 
-// just for intializing all the nodes to NULL and degree array to 0
+/* initializing the graph */
 void initialize_graph(graph *g, bool directed) {
     int i=0;
     g->nvertices=0;
@@ -32,6 +35,7 @@ void initialize_graph(graph *g, bool directed) {
     for(i=0; i<MAXV; i++) g->edge[i]=NULL;
 }
  
+/* Takes input the required params of the graph */
 void read_graph(graph *g) {
     int m, i;          // number of edges between edge(x, y)
     int x, y;       // x and y veritces
@@ -46,6 +50,7 @@ void read_graph(graph *g) {
     }
 }
 
+/* Insert edge in the graph given x and y */
 void insert_edge(graph *g, int x, int y, bool directed) {
     
     edgenode *p;  // temporary edgenode
@@ -62,6 +67,7 @@ void insert_edge(graph *g, int x, int y, bool directed) {
         g->nedges++;       // even for directed edge is incemented only once.
 }
 
+/* Display of the graph */
 void display_graph(graph *g) {
     int i=0;
     edgenode *j;
@@ -72,6 +78,12 @@ void display_graph(graph *g) {
             printf("%d ", j->info);
         printf("\n");
     }
+}
+
+/* Breadth First Search traversal of graph */
+void bfs_traversal(graph *g) {
+    
+         
 }
 
 int main(void) {
