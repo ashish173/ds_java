@@ -6,9 +6,56 @@ import java.math.*;
 
 public class SimilarNames2
 {
+	public int permute(int num) {
+		int permute=num;
+		for(int i=num-1; i>1; i--) {
+			permute *= i; 
+		}
+		return permute;
+	}
+	
 	public int count(String[] names, int L)
-	{
+	{	int x, y, count=0, finalcount=0;
+		ArrayList<String> keys = new ArrayList<String>(names.length);
+		HashMap<String, ArrayList<String>> hm = new HashMap<String, ArrayList<String>>();
 		
+		for(x=0; x<names.length; x++)
+			for(y=0; y<names.length; y++) {
+				if(!(names[x]==names[y])){
+					if(names[y].startsWith(names[x])) {
+						ArrayList<String> ar = new ArrayList<String>();
+						if(hm.containsKey(names[x])) {
+							 ar = hm.get(names[x]);
+							 ar.add(names[y]);
+							 hm.put(names[x], ar);
+						}
+						else {
+							System.out.println("key " + names[x]);
+							// store the key
+							keys.add(names[x]);
+							ar.add(names[y]);
+							hm.put(names[x], ar);
+						}		
+					}
+				}
+			}
+			
+			if(keys.size()==0)
+				return 0;
+			else {	
+				int matchLen = L-1;
+				for(int j=0; j<keys.size(); j++) {
+					ArrayList<String> ar = new ArrayList<String>();
+					String key = keys.get(j);
+					ar = hm.get(key);
+					// calculating the number of permutations
+					if(ar.size() == matchLen) { 
+						finalcount = finalcount + ( )
+					}
+				}
+				// int finalcalc = count * (permute(names.length - L));
+				return finalcalc;
+			}		
 	}
 	
 	// BEGIN KAWIGIEDIT TESTING
